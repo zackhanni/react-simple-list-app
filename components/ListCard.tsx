@@ -24,7 +24,7 @@ export const ListCard: React.FC<ListCardProps> = ({
 
   const [title, setTitle] = useState(cardData.title);
   const [list, setList] = useState(cardData.list);
-  const [id, setId] = useState(cardData.id);
+  const id = cardData.id;
   const [newItem, setNewItem] = useState("");
 
   const removeItem = (index: number) => {
