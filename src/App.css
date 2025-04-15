@@ -34,7 +34,10 @@
 }
 
 .card {
-  padding: 2em;
+  padding: 1rem;
+  background: white;
+  color: black;
+  text-align: left;
 }
 
 .read-the-docs {
