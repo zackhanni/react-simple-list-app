@@ -5,11 +5,22 @@
   text-align: center;
 }
 
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .card {
   padding: 1rem;
   background: white;
   color: black;
   text-align: left;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 20px;
 }
 
 .card-list-item > input {

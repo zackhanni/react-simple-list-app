@@ -24,6 +24,7 @@ export const ListCard = ({ cardData, saveData }) => {
 
   const handleSave = (e) => {
     e.preventDefault();
+    const updatedSaveData = [...saveData];
 
     // save updated form to parent component
   };
@@ -49,7 +50,7 @@ export const ListCard = ({ cardData, saveData }) => {
             { name, finished }: { name: string; finished: boolean },
             index: number
           ) => (
-            <p key={index} className="card-list-item">
+            <p key={title + index} className="card-list-item">
               <input
                 type="checkbox"
                 checked={finished}
