@@ -124,15 +124,17 @@ export const ListCard: React.FC<ListCardProps> = ({
           </button>
         </p>
       </form>
-      <div className="card-footer">
-        <button
-          className="delete-entire-list-btn"
-          type="button"
-          onClick={() => removeList(id)}
-        >
-          Delete entire list
-        </button>
-      </div>
+      {removeList && (
+        <div className="card-footer">
+          <button
+            className="delete-entire-list-btn"
+            type="button"
+            onClick={() => removeList(id)}
+          >
+            Delete entire list
+          </button>
+        </div>
+      )}
     </div>
   );
 };
