@@ -1,16 +1,19 @@
+"use client";
+
 import "./App.css";
 import ListCard from "../components/ListCard";
-
-const demoData = {
-  title: "Groceries",
-  list: ["Bananas", "Apples", "Plums", "Chocolate"],
-};
+import { useState } from "react";
 
 function App() {
+  const [demoData, setDemoData] = useState({
+    title: "Groceries",
+    listItems: ["Bananas", "Apples", "Plums", "Chocolate"],
+  });
+
   return (
     <main>
       <section>
-        <ListCard cardData={demoData} />
+        <ListCard cardData={demoData} editData={setDemoData} />
       </section>
     </main>
   );
