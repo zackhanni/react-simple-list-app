@@ -26,6 +26,7 @@ export const ListCard = ({ cardData, editData }) => {
     const updatedList = [...list];
     updatedList.push(newItem);
     setList(updatedList);
+    setNewItem("");
   };
 
   return (
@@ -44,12 +45,8 @@ export const ListCard = ({ cardData, editData }) => {
               onChange={(e) => handleChange(index, e.target.value)}
               placeholder={item}
             ></input>
-            <div>
-              {/* <button onClick={(e) => updateItem(index, e.target.value)}>
-                  Rename
-                </button> */}
-              <button onClick={() => removeItem(index)}>Delete</button>
-            </div>
+
+            <button onClick={() => removeItem(index)}>Delete</button>
           </p>
         ))}
         <p className="card-list-item">
@@ -59,7 +56,9 @@ export const ListCard = ({ cardData, editData }) => {
             onChange={(e) => setNewItem(e.target.value)}
             placeholder="Add new item"
           ></input>
-          <button onClick={() => addItem(newItem)}>Save</button>
+          <button type="button" onClick={() => addItem(newItem)}>
+            Save
+          </button>
         </p>
       </form>
     </div>
