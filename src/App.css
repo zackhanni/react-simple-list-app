@@ -18,10 +18,20 @@
   padding-left: 4px;
 }
 
+.card-list-item > input {
+  border: none;
+}
+
 .card-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.card-title > input {
+  font-weight: bold;
+  font-size: 1.5rem;
+  border: none;
 }
 
 .card-title > button {
@@ -40,4 +50,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.strike-through {
+  text-decoration: line-through;
 }

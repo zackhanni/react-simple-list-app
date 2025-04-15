@@ -1,20 +1,13 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
-export const ListCard = ({ cardData, editData }) => {
-  const { title, listItems } = cardData;
+export const ListCard = ({ cardData, saveData }) => {
+  const { cardTitle, listItems } = cardData;
+
+  const [title, setTitle] = useState(cardTitle);
   const [list, setList] = useState(listItems);
   const [newItem, setNewItem] = useState("");
-
-  const handleChange = useCallback(
-    (index: number, newValue: string) => {
-      const updatedList = [...list];
-      updatedList[index] = newValue;
-      setList(updatedList);
-    },
-    [list]
-  );
 
   const removeItem = (index: number) => {
     const updatedList = [...list];
@@ -24,31 +17,63 @@ export const ListCard = ({ cardData, editData }) => {
 
   const addItem = (newItem: string) => {
     const updatedList = [...list];
-    updatedList.push(newItem);
+    updatedList.push({ name: newItem, finished: false });
     setList(updatedList);
     setNewItem("");
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    // save updated form to parent component
   };
 
   return (
     <div className="card">
       <div className="card-title">
-        <h2>{title}</h2>
-        {listItems != list && <button>Save changes</button>}
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Name your list"
+        ></input>
+
+        {listItems != list && (
+          <button onClick={handleSave}>Save changes</button>
+        )}
       </div>
 
       <form>
-        {list.map((item: string, index: number) => (
-          <p key={item} className="card-list-item">
-            <input
-              type="text"
-              value={item}
-              onChange={(e) => handleChange(index, e.target.value)}
-              placeholder={item}
-            ></input>
+        {list.map(
+          (
+            { name, finished }: { name: string; finished: boolean },
+            index: number
+          ) => (
+            <p key={index} className="card-list-item">
+              <input
+                type="checkbox"
+                checked={finished}
+                onClick={() => {
+                  const updatedList = [...list];
+                  updatedList[index].finished = finished ? false : true;
+                  setList(updatedList);
+                }}
+              />
+              <input
+                type="text"
+                className={finished ? "strike-through" : ""}
+                value={name}
+                onChange={(e) => {
+                  const updatedList = [...list];
+                  updatedList[index].name = e.target.value;
+                  setList(updatedList);
+                }}
+              ></input>
 
-            <button onClick={() => removeItem(index)}>Delete</button>
-          </p>
-        ))}
+              <button onClick={() => removeItem(index)}>Delete</button>
+            </p>
+          )
+        )}
         <p className="card-list-item">
           <input
             type="text"
