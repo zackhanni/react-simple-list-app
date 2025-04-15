@@ -55,11 +55,25 @@ function App() {
   // }, [allData]);
 
   const updateList = (updatedList: Card) => {
-    const updatedAllData = [...allData];
+    const updatedAllData = allData;
     const listIndex = updatedAllData.findIndex(
       (obj) => obj.id === updatedList.id
     );
-    updatedAllData[listIndex] = updatedList;
+
+    if (listIndex == -1) {
+      updatedAllData.push(updatedList);
+    } else {
+      updatedAllData[listIndex] = updatedList;
+    }
+
+    setAllData(updatedAllData);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allData));
+  };
+
+  const removeList = (id: string) => {
+    const updatedAllData = allData;
+    const listIndex = updatedAllData.findIndex((obj) => obj.id === id);
+    updatedAllData.splice(listIndex, 1);
     setAllData(updatedAllData);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allData));
   };
@@ -79,6 +93,7 @@ function App() {
           <ListCard
             cardData={listCard}
             updateList={updateList}
+            removeList={removeList}
             key={listCard.id}
           />
         ))}
