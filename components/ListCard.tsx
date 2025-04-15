@@ -98,7 +98,11 @@ export const ListCard: React.FC<ListCardProps> = ({
                 }}
               ></input>
 
-              <button className="delete-btn" onClick={() => removeItem(index)}>
+              <button
+                type="button"
+                className="delete-btn"
+                onClick={() => removeItem(index)}
+              >
                 Delete
               </button>
             </p>
