@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const ListCard = ({ cardData, updateList }) => {
-  const { id, cardTitle, listItems } = cardData;
+  // const { id, title, list } = cardData;
 
-  const [title, setTitle] = useState(cardTitle);
-  const [list, setList] = useState(listItems);
+  const [title, setTitle] = useState(cardData.title);
+  const [list, setList] = useState(cardData.list);
+  const [id, setId] = useState(cardData.id);
   const [newItem, setNewItem] = useState("");
 
   const removeItem = (index: number) => {
@@ -17,13 +19,12 @@ export const ListCard = ({ cardData, updateList }) => {
 
   const addItem = (newItem: string) => {
     const updatedList = [...list];
-    updatedList.push({ name: newItem, finished: false });
+    updatedList.push({ id: uuidv4(), name: newItem, finished: false });
     setList(updatedList);
     setNewItem("");
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
+  const handleSave = () => {
     updateList({ id, title, list });
   };
 
@@ -37,8 +38,8 @@ export const ListCard = ({ cardData, updateList }) => {
           placeholder="Name your list"
         ></input>
 
-        {listItems != list && (
-          <button onClick={handleSave}>Save changes</button>
+        {cardData.list != list && (
+          <button onClick={() => handleSave()}>Save changes</button>
         )}
       </div>
 
@@ -55,7 +56,7 @@ export const ListCard = ({ cardData, updateList }) => {
             <p key={id} className="card-list-item">
               <input
                 type="checkbox"
-                checked={finished}
+                defaultChecked={finished}
                 onClick={() => {
                   const updatedList = [...list];
                   updatedList[index].finished = finished ? false : true;
