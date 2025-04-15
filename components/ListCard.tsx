@@ -3,7 +3,23 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export const ListCard = ({ cardData, updateList }) => {
+interface CardData {
+  id: string;
+  title: string;
+  list: Array<{ id: string; name: string; finished: boolean }>;
+}
+
+interface ListCardProps {
+  cardData: CardData;
+  updateList: (updatedData: CardData) => void;
+  removeList?: (id: string) => void;
+}
+
+export const ListCard: React.FC<ListCardProps> = ({
+  cardData,
+  updateList,
+  removeList,
+}) => {
   // const { id, title, list } = cardData;
 
   const [title, setTitle] = useState(cardData.title);
@@ -41,7 +57,11 @@ export const ListCard = ({ cardData, updateList }) => {
         ></input>
 
         {cardData.list != list && (
-          <button type="button" onClick={() => handleSaveChanges()}>
+          <button
+            className="save-btn"
+            type="button"
+            onClick={() => handleSaveChanges()}
+          >
             Save changes
           </button>
         )}
@@ -54,7 +74,7 @@ export const ListCard = ({ cardData, updateList }) => {
               id,
               name,
               finished,
-            }: { id: number; name: string; finished: boolean },
+            }: { id: string; name: string; finished: boolean },
             index: number
           ) => (
             <p key={id} className="card-list-item">
@@ -78,7 +98,9 @@ export const ListCard = ({ cardData, updateList }) => {
                 }}
               ></input>
 
-              <button onClick={() => removeItem(index)}>Delete</button>
+              <button className="delete-btn" onClick={() => removeItem(index)}>
+                Delete
+              </button>
             </p>
           )
         )}
@@ -89,11 +111,24 @@ export const ListCard = ({ cardData, updateList }) => {
             onChange={(e) => setNewItem(e.target.value)}
             placeholder="Add new item"
           ></input>
-          <button type="button" onClick={() => addItem(newItem)}>
+          <button
+            className="save-btn"
+            type="button"
+            onClick={() => addItem(newItem)}
+          >
             Save
           </button>
         </p>
       </form>
+      <div className="card-footer">
+        <button
+          className="delete-entire-list-btn"
+          type="button"
+          onClick={() => removeList(id)}
+        >
+          Delete entire list
+        </button>
+      </div>
     </div>
   );
 };
