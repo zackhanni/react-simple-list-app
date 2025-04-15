@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export const ListCard = ({ cardData, saveData }) => {
-  const { cardTitle, listItems } = cardData;
+export const ListCard = ({ cardData, updateList }) => {
+  const { id, cardTitle, listItems } = cardData;
 
   const [title, setTitle] = useState(cardTitle);
   const [list, setList] = useState(listItems);
@@ -24,9 +24,7 @@ export const ListCard = ({ cardData, saveData }) => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    const updatedSaveData = [...saveData];
-
-    // save updated form to parent component
+    updateList({ id, title, list });
   };
 
   return (
@@ -47,10 +45,14 @@ export const ListCard = ({ cardData, saveData }) => {
       <form>
         {list.map(
           (
-            { name, finished }: { name: string; finished: boolean },
+            {
+              id,
+              name,
+              finished,
+            }: { id: number; name: string; finished: boolean },
             index: number
           ) => (
-            <p key={title + index} className="card-list-item">
+            <p key={id} className="card-list-item">
               <input
                 type="checkbox"
                 checked={finished}
