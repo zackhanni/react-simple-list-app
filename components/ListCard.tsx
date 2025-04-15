@@ -12,19 +12,21 @@ export const ListCard = ({ cardData, updateList }) => {
   const [newItem, setNewItem] = useState("");
 
   const removeItem = (index: number) => {
-    const updatedList = [...list];
+    const updatedList = list;
     updatedList.splice(index, 1);
     setList(updatedList);
+    handleSaveChanges();
   };
 
   const addItem = (newItem: string) => {
-    const updatedList = [...list];
+    const updatedList = list;
     updatedList.push({ id: uuidv4(), name: newItem, finished: false });
     setList(updatedList);
     setNewItem("");
+    handleSaveChanges();
   };
 
-  const handleSave = () => {
+  const handleSaveChanges = () => {
     updateList({ id, title, list });
   };
 
@@ -39,7 +41,9 @@ export const ListCard = ({ cardData, updateList }) => {
         ></input>
 
         {cardData.list != list && (
-          <button onClick={() => handleSave()}>Save changes</button>
+          <button type="button" onClick={() => handleSaveChanges()}>
+            Save changes
+          </button>
         )}
       </div>
 
