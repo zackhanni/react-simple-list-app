@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { IoIosAddCircle } from "react-icons/io";
+import { RiMenuAddLine } from "react-icons/ri";
+import { RxCross2 } from "react-icons/rx";
+import { TbTrashXFilled } from "react-icons/tb";
 import { v4 as uuidv4 } from "uuid";
 
 interface CardData {
@@ -97,7 +101,7 @@ export const ListCard: React.FC<ListCardProps> = ({
                 className="delete-btn"
                 onClick={() => removeItem(index)}
               >
-                Delete
+                <RxCross2 />
               </button>
             </p>
           )
@@ -114,7 +118,7 @@ export const ListCard: React.FC<ListCardProps> = ({
             type="button"
             onClick={() => addItem(newItem)}
           >
-            Save
+            <RiMenuAddLine />
           </button>
         </p>
       </form>
