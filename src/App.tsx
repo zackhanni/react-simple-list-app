@@ -55,27 +55,28 @@ function App() {
   // }, [allData]);
 
   const updateList = (updatedList: Card) => {
-    const updatedAllData = allData;
-    const listIndex = updatedAllData.findIndex(
-      (obj) => obj.id === updatedList.id
+    const updatedAllData = allData.map((card) =>
+      card.id === updatedList.id ? updatedList : card
     );
 
-    if (listIndex == -1) {
-      updatedAllData.push(updatedList);
-    } else {
-      updatedAllData[listIndex] = updatedList;
-    }
+    // const listIndex = updatedAllData.findIndex(
+    //   (obj) => obj.id === updatedList.id
+    // );
+
+    // if (listIndex == -1) {
+    //   updatedAllData.push(updatedList);
+    // } else {
+    //   updatedAllData[listIndex] = updatedList;
+    // }
 
     setAllData(updatedAllData);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allData));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedAllData));
   };
 
   const removeList = (id: string) => {
-    const updatedAllData = allData;
-    const listIndex = updatedAllData.findIndex((obj) => obj.id === id);
-    updatedAllData.splice(listIndex, 1);
+    const updatedAllData = allData.filter((card) => card.id !== id);
     setAllData(updatedAllData);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allData));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedAllData));
   };
 
   return (

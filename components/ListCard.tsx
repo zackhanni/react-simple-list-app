@@ -53,10 +53,11 @@ export const ListCard: React.FC<ListCardProps> = ({
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          onBlur={handleSaveChanges}
           placeholder="Name your list"
         ></input>
 
-        {cardData.list != list && (
+        {/* {cardData.list != list && (
           <button
             className="save-btn"
             type="button"
@@ -64,7 +65,7 @@ export const ListCard: React.FC<ListCardProps> = ({
           >
             Save changes
           </button>
-        )}
+        )} */}
       </div>
 
       <form>
@@ -85,6 +86,7 @@ export const ListCard: React.FC<ListCardProps> = ({
                   const updatedList = [...list];
                   updatedList[index].finished = finished ? false : true;
                   setList(updatedList);
+                  handleSaveChanges();
                 }}
               />
               <input
@@ -92,9 +94,11 @@ export const ListCard: React.FC<ListCardProps> = ({
                 className={finished ? "strike-through" : ""}
                 value={name}
                 onChange={(e) => {
+                  e.preventDefault();
                   const updatedList = [...list];
                   updatedList[index].name = e.target.value;
                   setList(updatedList);
+                  handleSaveChanges();
                 }}
               ></input>
 
