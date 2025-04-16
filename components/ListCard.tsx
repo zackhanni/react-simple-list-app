@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { IoIosAddCircle } from "react-icons/io";
 import { RiMenuAddLine } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
-import { TbTrashXFilled } from "react-icons/tb";
 import { v4 as uuidv4 } from "uuid";
 
 interface CardData {
