@@ -50,25 +50,22 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(allData));
-  // }, [allData]);
-
   const updateList = (updatedList: Card) => {
     const updatedAllData = allData.map((card) =>
       card.id === updatedList.id ? updatedList : card
     );
+    setAllData(updatedAllData);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedAllData));
+  };
 
-    // const listIndex = updatedAllData.findIndex(
-    //   (obj) => obj.id === updatedList.id
-    // );
+  const createList = () => {
+    const updatedAllData = [...allData];
 
-    // if (listIndex == -1) {
-    //   updatedAllData.push(updatedList);
-    // } else {
-    //   updatedAllData[listIndex] = updatedList;
-    // }
-
+    updatedAllData.push({
+      id: uuidv4(),
+      title: "",
+      list: [],
+    });
     setAllData(updatedAllData);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedAllData));
   };
@@ -82,14 +79,6 @@ function App() {
   return (
     <main>
       <section className="cards">
-        <ListCard
-          cardData={{
-            id: uuidv4(),
-            title: "",
-            list: [],
-          }}
-          updateList={updateList}
-        />
         {allData.map((listCard) => (
           <ListCard
             cardData={listCard}
@@ -98,6 +87,7 @@ function App() {
             key={listCard.id}
           />
         ))}
+        <button onClick={createList}>+</button>
       </section>
     </main>
   );
