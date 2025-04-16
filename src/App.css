@@ -21,11 +21,6 @@ button {
   background-color: red;
 }
 
-.save-btn:hover {
-  background-color: green;
-  color: white;
-}
-
 .delete-entire-list-btn {
   font-size: 0.75rem;
   padding: 0;

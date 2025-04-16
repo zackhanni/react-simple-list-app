@@ -56,16 +56,6 @@ export const ListCard: React.FC<ListCardProps> = ({
           onBlur={handleSaveChanges}
           placeholder="Name your list"
         ></input>
-
-        {/* {cardData.list != list && (
-          <button
-            className="save-btn"
-            type="button"
-            onClick={() => handleSaveChanges()}
-          >
-            Save changes
-          </button>
-        )} */}
       </div>
 
       <form>
