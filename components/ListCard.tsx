@@ -73,6 +73,7 @@ export const ListCard: React.FC<ListCardProps> = ({
             <p key={id} className="card-list-item">
               <input
                 type="checkbox"
+                className="check-box"
                 defaultChecked={finished}
                 onClick={() => {
                   const updatedList = [...list];

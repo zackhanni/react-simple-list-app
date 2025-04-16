@@ -108,3 +108,7 @@ button:focus-visible {
   text-align: center;
   padding-top: 8px;
 }
+
+.check-box {
+  transform: scale(1.5);
+}
