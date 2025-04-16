@@ -125,7 +125,7 @@ export const ListCard: React.FC<ListCardProps> = ({
             type="button"
             onClick={() => removeList(id)}
           >
-            Delete entire list
+            Delete list
           </button>
         </div>
       )}
